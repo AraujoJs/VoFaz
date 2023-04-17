@@ -1,3 +1,42 @@
 <resources>
     <string name="app_name">VoFaz</string>
+    <string name="email">email</string>
+    <string name="sign">sign in your account</string>
+    <string name="btn_sign">Sign In</string>
+    <string name="dont_have_account">don\'t have an account?</string>
+    <string name="create">Create</string>
+
+    <string name="create_account">Create an account</string>
+    <string name="full_name">full name</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="have_account">already have an account?</string>
+    <string name="login">login</string>
+
+    <string name="hello">Hello, %1$s!</string>
+    <string name="search">search</string>
+    <string name="todo">To Do</string>
+    <string name="completed">completed</string>
+    <string name="add_first_task">Let\'s add your first task…</string>
+
+    <string name="complete_first_task">Let\'s add your first task…</string>
+
+    <string name="add_task">ADD Task</string>
+    <string name="add_task_sub">tackle your goals in daily doses</string>
+    <string name="set_icon">Set Icon</string>
+    <string name="Name_task">Name The Task</string>
+    <string name="name_task_hint">e.g Study Spanish</string>
+    <string name="date">Date</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="select_date">Select date</string>
+    <string name="time">Time</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="prev_task_name">e.g Study Spanish</string>
+
+    <string name="tomorrow_task">Tomorrow Tasks</string>
+    <string name="format_date_task">%1$s Tasks</string>
+
+    <string name="yesterday_tasks">Yesterday Tasks</string>
+
 </resources>
