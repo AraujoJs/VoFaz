@@ -38,5 +38,6 @@
     <string name="format_date_task">%1$s Tasks</string>
 
     <string name="yesterday_tasks">Yesterday Tasks</string>
+    <string name="password">password</string>
 
 </resources>
