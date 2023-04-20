@@ -39,5 +39,8 @@
 
     <string name="yesterday_tasks">Yesterday Tasks</string>
     <string name="password">password</string>
+    <string name="email_error">invalid Email adress</string>
+    <string name="password_error">password should have at least 8 characters</string>
+    <string name="logout">logout</string>
 
 </resources>

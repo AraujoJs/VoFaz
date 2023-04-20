@@ -1,11 +1,13 @@
-package com.example.vofaz
+package com.example.vofaz.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.vofaz.R
 
-class LoginActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(R.layout.activity_register)
+
     }
 }

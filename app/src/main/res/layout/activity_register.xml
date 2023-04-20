@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_500"
+    tools:context=".view.RegisterActivity">
+
+
+
+    <TextView
+        android:id="@+id/register_txt_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:text="@string/create_account"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/register_edit_layout_full_name"
+        style="@style/Theme.VoFaz.FormInputLayout"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_txt_logo">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/register_edit_full_name"
+                style="@style/Theme.VoFaz.FormEditText"
+                android:hint="@string/full_name"
+                android:inputType="textEmailAddress" />
+
+            <ImageView
+                style="@style/Theme.VoFaz.EditTextIcon"
+                android:contentDescription="@null"
+                android:src="@drawable/icon_user" />
+        </RelativeLayout>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/register_edit_layout_email"
+        style="@style/Theme.VoFaz.FormInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_edit_layout_full_name">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/register_edit_email"
+                style="@style/Theme.VoFaz.FormEditText"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
+
+            <ImageView
+                style="@style/Theme.VoFaz.EditTextIcon"
+                android:contentDescription="@null"
+                android:src="@drawable/icon_email" />
+        </RelativeLayout>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/register_edit_layout_password"
+        style="@style/Theme.VoFaz.FormInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_edit_layout_email">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/register_edit_password"
+                style="@style/Theme.VoFaz.FormEditText"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
+
+            <ImageView
+                style="@style/Theme.VoFaz.EditTextIcon"
+                android:contentDescription="@null"
+                android:src="@drawable/icon_lock" />
+        </RelativeLayout>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/register_edit_layout_confirm_password"
+        style="@style/Theme.VoFaz.FormInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_edit_layout_password">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/register_edit_confirm_password"
+                style="@style/Theme.VoFaz.FormEditText"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword" />
+
+            <ImageView
+                style="@style/Theme.VoFaz.EditTextIcon"
+                android:contentDescription="@null"
+                android:src="@drawable/icon_lock" />
+        </RelativeLayout>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.example.vofaz.view.SignButton
+        android:id="@+id/register_btn_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_edit_layout_confirm_password"
+        app:name="@string/create" />
+
+
+    <LinearLayout
+        android:id="@+id/register_layout_bottom_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="bottom"
+            android:text="@string/have_account"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/register_txt_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/login"
+            android:textColor="@color/orange_200"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
