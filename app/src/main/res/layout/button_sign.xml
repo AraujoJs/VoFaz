@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <Button
+
+        style="@style/Theme.VoFaz.Button.Main"
+        tools:text="@string/btn_sign" />
+
+    <ProgressBar
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_height="32dp"
+        android:layout_width="32dp"
+        android:indeterminateTint="@android:color/black"
+        tools:visibility="visible"
+        android:visibility="gone"
+        android:elevation="2dp"/>
+
+</merge>

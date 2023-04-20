@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_500"
-    tools:context=".LoginActivity">
+    tools:context=".view.LoginActivity">
 
     <ImageView
         android:id="@+id/login_img_logo"
@@ -32,13 +32,12 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-
+        android:id="@+id/login_edit_layout_email"
         app:layout_constraintTop_toBottomOf="@id/login_img_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/login_edit_layout_email"
         style="@style/Theme.VoFaz.FormInputLayout"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="70dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -47,11 +46,12 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/login_edit_email"
                 style="@style/Theme.VoFaz.FormEditText"
-                android:hint="@string/email" />
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"/>
 
             <ImageView
                 style="@style/Theme.VoFaz.EditTextIcon"
-                android:src="@drawable/icon_user"
+                android:src="@drawable/icon_email"
                 android:contentDescription="@null"/>
         </RelativeLayout>
     </com.google.android.material.textfield.TextInputLayout>
@@ -73,7 +73,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/login_edit_password"
                 style="@style/Theme.VoFaz.FormEditText"
-                android:hint="@string/password" />
+                android:hint="@string/password"
+                android:inputType="textPassword"/>
 
             <ImageView
                 style="@style/Theme.VoFaz.EditTextIcon"
@@ -83,8 +84,21 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
+    <com.example.vofaz.view.SignButton
+        android:id="@+id/login_btn_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:name="@string/btn_sign"
+        app:layout_constraintTop_toBottomOf="@id/login_edit_layout_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="90dp"
+        />
+
+
 
     <LinearLayout
+        android:id="@+id/login_layout_bottom_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,6 +113,7 @@
             android:layout_marginBottom="20dp"
             android:textColor="@color/white" />
         <TextView
+            android:id="@+id/login_btn_create"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/create"
