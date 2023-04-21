@@ -1,11 +1,13 @@
 package com.example.vofaz.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import com.example.vofaz.Login
+import com.example.vofaz.common.base.DependencyInjector
 import com.example.vofaz.common.util.TextWatcher
 
 import com.example.vofaz.databinding.ActivityLoginBinding
@@ -20,7 +22,7 @@ class LoginActivity : AppCompatActivity(), Login.View {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        presenter = LoginPresenter(this)
+        presenter = DependencyInjector.loginPresenter(this)
 
 
         with(binding) {
@@ -31,6 +33,9 @@ class LoginActivity : AppCompatActivity(), Login.View {
 
                 presenter.login(loginEditEmail.text.toString(), loginEditPassword.text.toString())
 
+            }
+            loginBtnCreate.setOnClickListener {
+                goToRegisterScreen()
             }
 
         }
@@ -56,7 +61,10 @@ class LoginActivity : AppCompatActivity(), Login.View {
     }
 
     override fun onUserAuthenticated() {
-        // TODO: Go to the next screen
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+
     }
 
     override fun onUserUnauthenticated(message: String) {
@@ -64,6 +72,6 @@ class LoginActivity : AppCompatActivity(), Login.View {
     }
 
     override fun goToRegisterScreen() {
-        TODO("Not yet implemented")
+        startActivity(Intent(this, RegisterActivity::class.java))
     }
 }

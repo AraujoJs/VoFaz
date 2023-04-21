@@ -5,17 +5,22 @@ import android.os.Looper
 import android.util.Patterns
 import com.example.vofaz.Login
 import com.example.vofaz.R
+import com.example.vofaz.data.MyCallback
+import com.example.vofaz.data.Repository
 
 
 class LoginPresenter(
-    override var view: Login.View?
+    override var view: Login.View?,
+    private val repository: Repository
     ): Login.Presenter {
 
     override fun login(email: String, password: String) {
+        view?.showProgress(true)
+
         val isEmailValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
         val isPasswordValid = password.length >= 8
 
-        view?.showProgress(true)
+
         Handler(Looper.getMainLooper()).postDelayed({
             if (!isEmailValid) {
                 view?.displayEmailFailure(R.string.email_error)
@@ -28,13 +33,27 @@ class LoginPresenter(
             else {
                 view?.displayPasswordFailure(null)
             }
+            view?.showProgress(false)
+
         }, 2000)
 
 
         if (isEmailValid && isPasswordValid) {
-            view?.onUserAuthenticated()
+            repository.login(email, password, object : MyCallback {
+                override fun onSuccess() {
+                    view?.onUserAuthenticated()
+                }
+
+                override fun onFailure(message: String) {
+                    view?.onUserUnauthenticated(message)
+                }
+
+
+                override fun onComplete() {
+                    view?.showProgress(false)
+                }
+            })
         }
-        view?.showProgress(false)
     }
 
 

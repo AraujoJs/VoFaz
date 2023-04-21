@@ -49,8 +49,8 @@ class SignButton: FrameLayout {
             progress.visibility = View.VISIBLE
             button.isEnabled = false
         } else {
-            button.text = btnText
             progress.visibility = View.GONE
+            button.text = btnText
             button.isEnabled = true
         }
     }
