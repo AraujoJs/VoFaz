@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Theme.VoFaz.FormInputLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_edit_email"
+            style="@style/Theme.VoFaz.FormEditText"
+            android:hint="@string/search"
+            android:inputType="textEmailAddress" />
+
+        <ImageView
+            style="@style/Theme.VoFaz.EditTextIcon"
+            android:contentDescription="@null"
+            android:src="@drawable/icon_search" />
+    </RelativeLayout>
+</com.google.android.material.textfield.TextInputLayout>
