@@ -1,17 +1,13 @@
 package com.example.vofaz.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.vofaz.Login
 import com.example.vofaz.common.base.DependencyInjector
 import com.example.vofaz.common.util.TextWatcher
-
 import com.example.vofaz.databinding.ActivityLoginBinding
-import com.example.vofaz.presentation.LoginPresenter
 
 class LoginActivity : AppCompatActivity(), Login.View {
     override lateinit var presenter: Login.Presenter
