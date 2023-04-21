@@ -11,6 +11,7 @@ object Database {
     init {
         userAuth.add(UserAuth(UUID.randomUUID().toString(), "Arthur Lima", "a@a.com", "123456789"))
         userAuth.add(UserAuth(UUID.randomUUID().toString(), "José Araujo", "b@b.com", "987654321"))
+        sessionAuth = userAuth.elementAt(0)
     }
 
 }

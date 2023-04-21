@@ -1,6 +1,7 @@
 package com.example.vofaz.data
 
 import android.os.Looper
+import android.provider.ContactsContract.Data
 import com.example.vofaz.common.model.Database
 import com.example.vofaz.common.model.UserAuth
 import java.util.UUID
@@ -16,6 +17,7 @@ class FakeDatabase: MyDatabase {
             } else if (password != userAuth.password) {
                     callback.onFailure("Wrong password.")
                 } else {
+                    Database.sessionAuth = userAuth
                     callback.onSuccess()
                 }
             callback.onComplete()

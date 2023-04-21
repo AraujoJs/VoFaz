@@ -1,22 +1,29 @@
 package com.example.vofaz.view
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import com.example.vofaz.Main
 import com.example.vofaz.R
 import com.example.vofaz.Register
 import com.example.vofaz.common.model.Database
 import com.example.vofaz.databinding.ActivityMainBinding
 
-class MainActivity: AppCompatActivity(), Register.View, FragmentAttachListener {
+class MainActivity: AppCompatActivity(), Main.View, FragmentAttachListener {
 
-    override lateinit var presenter: Register.Presenter
+    override lateinit var presenter: Main.Presenter
     private lateinit var binding: ActivityMainBinding
     private var toolbarIsExpanded: Boolean = false
+    private var isTodoSelected: Boolean = true
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,23 +31,45 @@ class MainActivity: AppCompatActivity(), Register.View, FragmentAttachListener {
         setContentView(binding.root)
 
         val toolbar: Toolbar = binding.mainToolbar.mainToolbar
-
+        getTasks(isTodoSelected)
 
         setSupportActionBar(toolbar)
 
         supportActionBar?.title = ""
 
-        with(binding) {
-
+        binding.mainToolbar.mainToolbarName.text = Database.sessionAuth?.let {
+            it.fullName.split(" ")[0]
         }
 
+        with(binding) {
+            mainBtnTodo.btnTodo.setOnClickListener {
+                getTasks(isTodoSelected)
+            }
+
+            mainBtnCompleted.btnCompleted.setOnClickListener {
+                getTasks(!isTodoSelected)
+            }
+
+        }
         val fragment = ContentFragment()
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(R.id.main_content_fragment, fragment)
-//            addToBackStack(null)
-//            commit()
-//        }
+        replaceFragment(fragment)
     }
+
+    fun replaceFragment(fragment: Fragment) {
+        if (supportFragmentManager.findFragmentById(R.id.main_fragment) == null) {
+            supportFragmentManager.beginTransaction().apply {
+                add(R.id.main_fragment, fragment)
+                commit()
+            }
+        } else {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.main_fragment, fragment)
+                addToBackStack(null)
+                commit()
+            }
+        }
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -57,40 +86,13 @@ class MainActivity: AppCompatActivity(), Register.View, FragmentAttachListener {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun showProgress(enabled: Boolean) {
-        TODO("Not yet implemented")
-    }
-
-    override fun displayNameFailure(nameError: Int?) {
-        TODO("Not yet implemented")
-    }
-
-    override fun displayEmailFailure(emailError: Int?) {
-        TODO("Not yet implemented")
-    }
-
-    override fun displayPasswordFailure(passwordError: Int?) {
-        TODO("Not yet implemented")
-    }
-
-    override fun displayPasswordNotEquals(notEqualsError: Int?) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onUserNotCreated(message: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onUserCreated() {
-        TODO("Not yet implemented")
-    }
-
     private fun goToLoginScreen() {
         val intent = Intent(this, LoginActivity::class.java)
         Database.sessionAuth = null
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
     }
+
 
     override fun expandScreen() {
         with(binding) {
@@ -106,6 +108,31 @@ class MainActivity: AppCompatActivity(), Register.View, FragmentAttachListener {
             }
         }
     }
-
     override fun isToolbarExpanded(): Boolean = toolbarIsExpanded
+
+    private fun getTasks(isTodoSelected: Boolean) {
+        with(binding) {
+            if (isTodoSelected) {
+                mainBtnTodo.btnTodo.setBackgroundColor(
+                    ActivityCompat.getColor(mainBtnTodo.btnTodo.context, R.color.gray_700)
+                )
+                mainBtnTodo.btnTodo.setTextColor(
+                    ActivityCompat.getColor(mainBtnTodo.btnTodo.context, R.color.orange_200)
+                )
+                mainBtnCompleted.btnCompleted.setBackgroundColor(
+                    Color.TRANSPARENT)
+                mainBtnCompleted.btnCompleted.setTextColor(
+                    ActivityCompat.getColor(mainBtnCompleted.btnCompleted.context, R.color.gray_200)
+                )
+
+            } else {
+                mainBtnTodo.btnTodo.setBackgroundColor(Color.TRANSPARENT)
+                mainBtnTodo.btnTodo.setTextColor(ActivityCompat.getColor(mainBtnTodo.btnTodo.context, R.color.gray_200))
+
+                mainBtnCompleted.btnCompleted.setBackgroundColor(ActivityCompat.getColor(mainBtnCompleted.btnCompleted.context, R.color.gray_700))
+                mainBtnCompleted.btnCompleted.setTextColor(ActivityCompat.getColor(mainBtnCompleted.btnCompleted.context, R.color.gray_100))
+            }
+
+        }
+    }
 }
