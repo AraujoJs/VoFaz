@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/time_picker_background"
+        >
+        <ImageView
+            android:id="@+id/hour_btn_up"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/baseline_arrow_drop_up_24"
+            app:tint="@color/gray_100"
+            android:contentDescription="@null"
+            />
+
+        <TextView
+            android:id="@+id/hour_txt_hour"
+            android:gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/hour_begin"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/gray_100"/>
+
+
+        <ImageView
+            android:id="@+id/hour_btn_down"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/arrow_bottom"
+            app:tint="@color/gray_100"
+            android:contentDescription="@null"
+            />
+
+
+    </LinearLayout>
+
+</FrameLayout>
