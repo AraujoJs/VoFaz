@@ -1,5 +1,9 @@
 package com.example.vofaz.data
 
+import androidx.annotation.DrawableRes
+import java.time.LocalDate
+import java.time.LocalTime
+
 class Repository(
     private val database: MyDatabase
     ) {
@@ -12,4 +16,7 @@ class Repository(
     }
 
 
+    fun add(@DrawableRes icon: Int, name: String, date: LocalDate?, time: LocalTime?, callback: MyCallback) {
+        database.add(icon, name, date, time, callback)
+    }
 }

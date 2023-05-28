@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background">
+
+    <TextView
+        android:id="@+id/add_txt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/add_task"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:layout_marginStart="40dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/add_txt_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_task_sub"
+        android:textColor="@color/gray_200"
+        android:textSize="11sp"
+        android:layout_marginStart="40dp"
+        app:layout_constraintStart_toStartOf="@id/add_txt_title"
+        app:layout_constraintTop_toBottomOf="@id/add_txt_title" />
+
+    <ImageView
+        android:id="@+id/btn_exit"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/button_background_round"
+        android:backgroundTint="@color/gray_500"
+        android:src="@drawable/baseline_close_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@null"
+        />
+
+
+    <TextView
+        android:id="@+id/add_txt_set_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/set_icon"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_txt_subtitle" />
+
+    <ImageView
+        android:id="@+id/add_img_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_background_round"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/icon_user"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_txt_set_icon"
+        android:contentDescription="@null"
+        />
+
+    <TextView
+        android:id="@+id/add_txt_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/Name_task"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginStart="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_img_icon" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/add_edit_input_name"
+        style="@style/Theme.VoFaz.FormInputLayout"
+
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_txt_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/add_edit_name"
+            style="@style/Theme.VoFaz.FormEditText.Add"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/add_txt_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/date"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginStart="40dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_edit_input_name" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/add_container_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/add_txt_date">
+
+        <Button
+            android:id="@+id/add_btn_today"
+            style="@style/Theme.VoFaz.Button.Date"
+            android:text="@string/today"/>
+
+        <Button
+            android:id="@+id/add_btn_tomorrow"
+            style="@style/Theme.VoFaz.Button.Date"
+            android:text="@string/tomorrow"/>
+
+        <Button
+            android:id="@+id/add_btn_date"
+            style="@style/Theme.VoFaz.Button.Date"
+            android:text="@string/select_date"
+            android:drawableEnd="@drawable/arrow_bottom"
+            android:drawableTint="@color/gray_100"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        android:id="@+id/add_txt_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15sp"
+        android:text="@string/time"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginStart="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_container_date" />
+
+
+    <include
+        android:id="@+id/time_picker_layout"
+        layout="@layout/time_picker" app:layout_constraintTop_toBottomOf="@id/add_txt_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
