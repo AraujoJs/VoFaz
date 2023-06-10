@@ -9,6 +9,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import com.example.vofaz.Add
 import com.example.vofaz.R
+import com.example.vofaz.common.view.RvAdapter
 import com.example.vofaz.data.MyCallback
 import com.example.vofaz.data.Repository
 import java.time.LocalDate
@@ -56,6 +57,7 @@ class AddPresenter(
                     "Task:",
                     "Name: ${name}, Date:${date}, time: ${time.toString()} Icon ref:${icon}"
                 )
+
                 view?.goToMainScreen()
             }
 

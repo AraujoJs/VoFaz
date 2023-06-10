@@ -5,6 +5,6 @@ import androidx.annotation.StringRes
 
 data class CategoryTask(
     @StringRes val name: Int,
-    val tasks: ArraySet<Task>? = null,
+    val tasks: MutableList<Task>? = null,
     var isExpanded: Boolean = false
 )

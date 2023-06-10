@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.util.ArraySet
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
@@ -12,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vofaz.R
 import com.example.vofaz.common.model.CategoryTask
-import com.example.vofaz.common.model.Task
+import com.example.vofaz.common.model.Database
 import com.example.vofaz.common.view.RvAdapter
 import com.example.vofaz.databinding.FragmentContentMainBinding
 
@@ -48,23 +47,25 @@ class ContentFragment: Fragment(R.layout.fragment_content_main) {
                     }
                 }
 
-                val category1 = CategoryTask(
-                    R.string.today_task,
-                    ArraySet<Task>(),
-                    false
-                )
+                val category1 = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    Database.categoryTaskData.elementAt(0)
+                } else {
+                    TODO("VERSION.SDK_INT < O")
+                }
 
-                val category2 = CategoryTask(
-                    R.string.tomorrow_task,
-                    ArraySet<Task>(),
-                    false
-                )
 
-                val category3 = CategoryTask(
-                    R.string.format_date_task,
-                    ArraySet<Task>(),
-                    false
-                )
+                val category2 = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    Database.categoryTaskData.elementAt(1)
+                } else {
+                    TODO("VERSION.SDK_INT < O")
+                }
+
+                val category3 = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    Database.categoryTaskData.elementAt(2)
+                } else {
+                    TODO("VERSION.SDK_INT < O")
+                }
+
 
                 categoryTasks.add(category1)
                 categoryTasks.add(category2)
@@ -75,12 +76,6 @@ class ContentFragment: Fragment(R.layout.fragment_content_main) {
         }
 
         }
-
-
-
-
-
-
 
 
     override fun onAttach(context: Context) {

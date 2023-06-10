@@ -56,9 +56,8 @@ class FakeDatabase : MyDatabase {
     ) {
 
         val task = Task(UUID.randomUUID().toString(), icon, name, date, time)
-        val tasks = Database.tasks
+        val isAdded = Database.categoryTaskData.elementAt(0).tasks?.add(task) ?: false
 
-        val isAdded = tasks.add(task)
 
         if (isAdded) callback.onSuccess() else callback.onFailure("Internal error")
 

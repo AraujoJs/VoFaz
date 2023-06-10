@@ -16,6 +16,7 @@ import com.example.vofaz.Main
 import com.example.vofaz.R
 import com.example.vofaz.common.base.DependencyInjector
 import com.example.vofaz.common.model.Database
+import com.example.vofaz.common.model.Task
 import com.example.vofaz.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), Main.View, FragmentAttachListener {
@@ -77,13 +78,6 @@ class MainActivity : AppCompatActivity(), Main.View, FragmentAttachListener {
     }
 
 
-
-
-
-
-
-
-
     private fun replaceFragment(fragment: Fragment) {
         if (supportFragmentManager.findFragmentById(R.id.main_fragment) == null) {
             supportFragmentManager.beginTransaction().apply {
@@ -141,9 +135,19 @@ class MainActivity : AppCompatActivity(), Main.View, FragmentAttachListener {
         }
     }
 
+
+
     override fun isToolbarExpanded(): Boolean = toolbarIsExpanded
 
-    override fun showTasks(isTodoSelected: Boolean) {
+    override fun showTasks(isTodoSelected: Boolean,task: Task) {
+        setButtons(isTodoSelected)
+
+    }
+
+
+
+
+    private fun setButtons(isTodoSelected: Boolean) {
         with(binding) {
             if (isTodoSelected) {
                 mainBtnTodo.btnTodo.setBackgroundColor(

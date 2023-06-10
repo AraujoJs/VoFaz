@@ -1,7 +1,6 @@
 package com.example.vofaz.presentation
 
 import com.example.vofaz.Main
-import com.example.vofaz.common.model.Database
 import com.example.vofaz.data.Repository
 
 class MainPresenter(
@@ -15,9 +14,7 @@ class MainPresenter(
     }
 
     override fun getTasks(isTodoSelected: Boolean) {
-
-
-        view?.showTasks(isTodoSelected)
+//        view?.showTasks(isTodoSelected, task)
     }
 
     override fun onDestroy() {

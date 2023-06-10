@@ -22,7 +22,7 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*
 
-class AddDialog : DialogFragment(), Add.View {
+class AddDialog() : DialogFragment(), Add.View {
     override lateinit var presenter: Add.Presenter
     private lateinit var binding: DialogAddBinding
 
@@ -33,6 +33,7 @@ class AddDialog : DialogFragment(), Add.View {
 
     private var isToday = false
     private var isTomorrow = false
+
 
 
     @RequiresApi(Build.VERSION_CODES.O)
