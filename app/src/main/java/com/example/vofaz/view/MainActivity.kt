@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity(), Main.View, FragmentAttachListener {
 
     override lateinit var presenter: Main.Presenter
     private lateinit var binding: ActivityMainBinding
+    private lateinit var fragment: ContentFragment
 
     private var toolbarIsExpanded: Boolean = false
     private var isTodoSelected: Boolean = true
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity(), Main.View, FragmentAttachListener {
 
         val toolbar: Toolbar = binding.mainToolbar.mainToolbar
 
-        val fragment = ContentFragment()
+        fragment = ContentFragment()
         replaceFragment(fragment)
         presenter.getTasks(isTodoSelected)
 
@@ -68,7 +69,7 @@ class MainActivity : AppCompatActivity(), Main.View, FragmentAttachListener {
 
 
             mainBtnAdd.setOnClickListener {
-                val addDialog = AddDialog()
+                val addDialog = AddDialog(this@MainActivity)
                 addDialog.show(supportFragmentManager, "CustomDialog")
             }
 
@@ -77,6 +78,9 @@ class MainActivity : AppCompatActivity(), Main.View, FragmentAttachListener {
 
     }
 
+    override fun notifyRvTasks() {
+        fragment.notifyData()
+    }
 
     private fun replaceFragment(fragment: Fragment) {
         if (supportFragmentManager.findFragmentById(R.id.main_fragment) == null) {

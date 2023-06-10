@@ -13,6 +13,7 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.example.vofaz.Add
+import com.example.vofaz.Main
 import com.example.vofaz.R
 import com.example.vofaz.common.base.DependencyInjector
 import com.example.vofaz.databinding.DialogAddBinding
@@ -22,7 +23,7 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*
 
-class AddDialog() : DialogFragment(), Add.View {
+class AddDialog(val view: Main.View) : DialogFragment(), Add.View {
     override lateinit var presenter: Add.Presenter
     private lateinit var binding: DialogAddBinding
 
@@ -201,6 +202,7 @@ class AddDialog() : DialogFragment(), Add.View {
 
 
     override fun goToMainScreen() {
+        view.notifyRvTasks()
         dialog?.dismiss()
     }
 

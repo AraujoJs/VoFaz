@@ -22,7 +22,6 @@ class ContentFragment: Fragment(R.layout.fragment_content_main) {
     private lateinit var adapter: RvAdapter
     private var categoryTasks = ArrayList<CategoryTask>()
 
-    @SuppressLint("NotifyDataSetChanged")
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,12 +70,16 @@ class ContentFragment: Fragment(R.layout.fragment_content_main) {
                 categoryTasks.add(category2)
                 categoryTasks.add(category3)
 
-                adapter.notifyDataSetChanged()
+                notifyData()
             }
         }
 
         }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun notifyData() {
+        adapter.notifyDataSetChanged()
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

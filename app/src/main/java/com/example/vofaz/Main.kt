@@ -7,7 +7,7 @@ import com.example.vofaz.common.model.Task
 interface Main {
     interface View: BaseView<Presenter> {
         fun showTasks(isTodoSelected: Boolean, task: Task)
-
+        fun notifyRvTasks()
 
     }
 
