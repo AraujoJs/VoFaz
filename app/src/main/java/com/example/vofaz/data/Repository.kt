@@ -1,6 +1,8 @@
 package com.example.vofaz.data
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import com.example.vofaz.common.model.Task
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -16,7 +18,11 @@ class Repository(
     }
 
 
-    fun add(@DrawableRes icon: Int, name: String, date: LocalDate?, time: LocalTime?, callback: MyCallback) {
-        database.add(icon, name, date, time, callback)
+    fun addTask(day: String, @DrawableRes icon: Int, name: String, date: LocalDate?, time: LocalTime?, callback: MyCallback) {
+        database.addTask(day, icon, name, date, time, callback)
+    }
+
+    fun addCategory(day: String, @StringRes name: Int, tasks: MutableList<Task>, isExpanded: Boolean, callback: MyCallback) {
+        database.addCategory(day, name, tasks, isExpanded, callback)
     }
 }

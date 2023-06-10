@@ -14,21 +14,29 @@ import java.time.format.DateTimeFormatter
 
 class RvTask(
     private val context: Context,
-    private var taskList: MutableList<Task>
+    private var taskList: MutableList<Task>,
+    private val isTodo: Boolean
 ): RecyclerView.Adapter<RvTask.ViewHolder>() {
 
 
-    inner class ViewHolder(private val binding: TaskLayoutBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(
+
+        private val binding: TaskLayoutBinding
+
+        ): RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
         @SuppressLint("NotifyDataSetChanged")
         fun bind(task: Task) {
             with(binding) {
-
                 taskTxtName.text = task.name
                 taskImgIcon.setImageDrawable(ContextCompat.getDrawable(context, task.icon))
 
                 val hour = task.localTime?.format(DateTimeFormatter.ofPattern("hh:mm"))
                 taskHour.text = hour
+
+                taskBtnSelect.setOnClickListener {
+                    taskList.remove(task)
+                }
 
             }
 
@@ -37,13 +45,22 @@ class RvTask(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RvTask.ViewHolder {
         val binding = TaskLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return ViewHolder(binding)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: RvTask.ViewHolder, position: Int) {
         val task = taskList[position]
-        holder.bind(task)
+        if (isTodo) {
+            if (!task.isSelected) {
+                holder.bind(task)
+            }
+        } else {
+            if (task.isSelected) {
+                holder.bind(task)
+            }
+        }
     }
 
     override fun getItemCount(): Int {

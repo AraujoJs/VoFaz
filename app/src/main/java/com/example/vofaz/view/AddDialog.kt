@@ -202,7 +202,8 @@ class AddDialog(val view: Main.View) : DialogFragment(), Add.View {
 
 
     override fun goToMainScreen() {
-        view.notifyRvTasks()
+        view.notifyData()
+
         dialog?.dismiss()
     }
 

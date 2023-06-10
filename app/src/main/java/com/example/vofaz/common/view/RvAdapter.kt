@@ -13,7 +13,8 @@ import com.example.vofaz.databinding.BtnTaskLayoutBinding
 
 class RvAdapter(
     private val context: Context,
-    private var categoryList: List<CategoryTask>
+    private var categoryList: MutableMap<String, CategoryTask>,
+    private var isTodo: Boolean
 ): RecyclerView.Adapter<RvAdapter.ViewHolder>() {
 
 
@@ -23,7 +24,8 @@ class RvAdapter(
         fun bind(category: CategoryTask) {
             with(binding) {
 
-                btnTxtName.text = context.getString(category.name)
+                btnTxtName.setText(category.name)
+
                 if(category.isExpanded) {
                     btnExpandedView.visibility = View.VISIBLE
 
@@ -38,7 +40,7 @@ class RvAdapter(
                 val tasks: MutableList<Task> = category.tasks ?: mutableListOf()
 
                 rvBtnTask.layoutManager = LinearLayoutManager(context)
-                val adapter = RvTask(context, tasks)
+                val adapter = RvTask(context, tasks, isTodo)
 
                 rvBtnTask.adapter = adapter
             }
@@ -52,8 +54,11 @@ class RvAdapter(
     }
 
     override fun onBindViewHolder(holder: RvAdapter.ViewHolder, position: Int) {
-        val categoryTask = categoryList[position]
-        holder.bind(categoryTask)
+        val keys = categoryList.keys.toList()
+        val category = categoryList[keys[position]]
+        if (category != null) {
+            holder.bind(category)
+        }
     }
 
     override fun getItemCount(): Int {

@@ -20,7 +20,7 @@ class ContentFragment: Fragment(R.layout.fragment_content_main) {
     private var fragmentAttachListener: FragmentAttachListener? = null
 
     private lateinit var adapter: RvAdapter
-    private var categoryTasks = ArrayList<CategoryTask>()
+    private var categoryTasks = mutableMapOf<String, CategoryTask>()
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,7 +30,9 @@ class ContentFragment: Fragment(R.layout.fragment_content_main) {
             with(it) {
 
                 rvMainBtn.layoutManager = LinearLayoutManager(requireContext())
-                adapter = RvAdapter(view.context, categoryTasks)
+                adapter = RvAdapter(view.context, categoryTasks,
+                    fragmentAttachListener?.isTodoSelected() ?: false
+                )
                 rvMainBtn.adapter = adapter
 
 
@@ -45,40 +47,42 @@ class ContentFragment: Fragment(R.layout.fragment_content_main) {
 
                     }
                 }
-
-                val category1 = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    Database.categoryTaskData.elementAt(0)
-                } else {
-                    TODO("VERSION.SDK_INT < O")
-                }
-
-
-                val category2 = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    Database.categoryTaskData.elementAt(1)
-                } else {
-                    TODO("VERSION.SDK_INT < O")
-                }
-
-                val category3 = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    Database.categoryTaskData.elementAt(2)
-                } else {
-                    TODO("VERSION.SDK_INT < O")
-                }
-
-
-                categoryTasks.add(category1)
-                categoryTasks.add(category2)
-                categoryTasks.add(category3)
-
-                notifyData()
+                getData()
             }
         }
 
         }
 
     @SuppressLint("NotifyDataSetChanged")
+    fun getData() {
+        binding?.let {
+            with(it) {
+                val database = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    Database.categoriesTaskData
+                } else {
+                    TODO("VERSION.SDK_INT < O")
+                }
+
+                if (database.isEmpty()) {
+                    mainTxtFirst.visibility = View.VISIBLE
+                    rvMainBtn.visibility = View.GONE
+                } else {
+                    mainTxtFirst.visibility = View.GONE
+                    rvMainBtn.visibility = View.VISIBLE
+
+                    database.forEach { (key, category) ->
+                        categoryTasks[key] = category
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+            }
+        }
+
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     fun notifyData() {
-        adapter.notifyDataSetChanged()
+        getData()
     }
 
     override fun onAttach(context: Context) {

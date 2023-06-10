@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Looper
 import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
+import com.example.vofaz.common.model.CategoryTask
 import com.example.vofaz.common.model.Database
 import com.example.vofaz.common.model.Task
 import com.example.vofaz.common.model.UserAuth
@@ -47,7 +48,8 @@ class FakeDatabase : MyDatabase {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun add(
+    override fun addTask(
+        day: String,
         @DrawableRes icon: Int,
         name: String,
         date: LocalDate?,
@@ -55,11 +57,32 @@ class FakeDatabase : MyDatabase {
         callback: MyCallback
     ) {
 
-        val task = Task(UUID.randomUUID().toString(), icon, name, date, time)
-        val isAdded = Database.categoryTaskData.elementAt(0).tasks?.add(task) ?: false
+        val task = Task(UUID.randomUUID().toString(), icon, name, date, time, false)
+
+        val categories = Database.categoriesTaskData
+
+        val isAdded = categories[day]?.tasks?.add(task)
 
 
-        if (isAdded) callback.onSuccess() else callback.onFailure("Internal error")
+        if (isAdded == true) callback.onSuccess() else callback.onFailure("Internal error")
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun addCategory(
+        day: String,
+        name: Int,
+        tasks: MutableList<Task>,
+        isExpanded: Boolean,
+        callback: MyCallback
+    ) {
+        val categories = Database.categoriesTaskData
+
+        if (categories.containsKey(day)) {
+            callback.onFailure("Category already exist!")
+        } else {
+            categories[day] = CategoryTask(name, tasks, isExpanded)
+        }
 
     }
 }

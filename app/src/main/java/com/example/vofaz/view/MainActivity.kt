@@ -28,6 +28,9 @@ class MainActivity : AppCompatActivity(), Main.View, FragmentAttachListener {
     private var toolbarIsExpanded: Boolean = false
     private var isTodoSelected: Boolean = true
 
+    override fun isTodoSelected(): Boolean {
+        return isTodoSelected
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,7 +81,7 @@ class MainActivity : AppCompatActivity(), Main.View, FragmentAttachListener {
 
     }
 
-    override fun notifyRvTasks() {
+    override fun notifyData() {
         fragment.notifyData()
     }
 

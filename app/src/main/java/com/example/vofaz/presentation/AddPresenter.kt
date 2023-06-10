@@ -9,6 +9,8 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import com.example.vofaz.Add
 import com.example.vofaz.R
+import com.example.vofaz.common.model.Database
+import com.example.vofaz.common.model.Task
 import com.example.vofaz.data.MyCallback
 import com.example.vofaz.data.Repository
 import java.time.LocalDate
@@ -22,6 +24,7 @@ class AddPresenter(
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun add(
+
         @DrawableRes icon: Int,
         name: String,
         date: LocalDate?,
@@ -30,6 +33,8 @@ class AddPresenter(
         val isNameValid = name.length > 3
         val isTimeValid = LocalTime.now() < time
         val isDateValid = LocalDate.now() <= date
+
+        val categories = Database.categoriesTaskData
 
         if (!isNameValid) {
             view?.displayNameError(R.string.name_error)
@@ -50,23 +55,40 @@ class AddPresenter(
             view?.displayDateError(null)
         }
 
-        repository?.add(icon, name, date, time, object : MyCallback {
-            override fun onSuccess() {
-                Log.i(
-                    "Task:",
-                    "Name: ${name}, Date:${date}, time: ${time.toString()} Icon ref:${icon}"
-                )
-                view?.goToMainScreen()
-            }
+        val day = if (date?.isEqual(LocalDate.now()) == true) {
+            "today"
+        } else if (date?.isEqual(LocalDate.now().plusDays(1)) == true) {
+            "tomorrow"
+        } else {
+            "other"
+        }
 
-            override fun onFailure(message: String) {
-                view?.displayOnFailure(message)
+        when (day) {
+            "today" -> {
+                if (categories.containsKey("today")) {
+                    addTask(day, icon, name, date, time)
+                } else {
+                    addCategory(day, R.string.today_task, mutableListOf())
+                    addTask(day, icon, name, date, time)
+                }
             }
-
-            override fun onComplete() {
-
+            "tomorrow" -> {
+                if (categories.containsKey("tomorrow")) {
+                    addTask(day, icon, name, date, time)
+                } else {
+                    addCategory(day, R.string.tomorrow_task, mutableListOf())
+                    addTask(day, icon, name, date, time)
+                }
             }
-        })
+            else -> {
+                if (categories.containsKey("other")) {
+                    addTask(day, icon, name, date, time)
+                } else {
+                    addCategory(day, R.string.format_date_task, mutableListOf())
+                    addTask(day, icon, name, date, time)
+                }
+            }
+        }
         return true
     }
 
@@ -166,4 +188,36 @@ override fun onDestroy() {
     view = null
     repository = null
 }
+    private fun addTask(day: String, icon: Int, name: String, date: LocalDate?, time: LocalTime?) {
+        repository?.addTask(day, icon, name, date, time, object : MyCallback {
+            override fun onSuccess() {
+                Log.i(
+                    "Task:",
+                    "Name: ${name}, Date:${date}, time: ${time.toString()} Icon ref:${icon}"
+                )
+                view?.goToMainScreen()
+            }
+
+            override fun onFailure(message: String) {
+                view?.displayOnFailure(message)
+            }
+
+            override fun onComplete() {
+
+            }
+        })
+    }
+
+    private fun addCategory(day: String, name: Int, tasks: MutableList<Task>) {
+        repository?.addCategory(day, name, tasks, false,  object : MyCallback {
+            override fun onSuccess() {
+
+            }
+            override fun onFailure(message: String) {
+                view?.displayOnFailure("Can't implement category")
+            }
+            override fun onComplete() {
+            }
+        })
+    }
 }
