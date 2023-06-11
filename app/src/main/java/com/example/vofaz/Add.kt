@@ -24,7 +24,7 @@ interface Add {
     }
 
     interface Presenter : BasePresenter<View> {
-        fun add(@DrawableRes icon: Int, name: String, date: LocalDate?, time: LocalTime?): Boolean
+        fun add(@DrawableRes icon: Int, name: String, date: LocalDate?, time: LocalTime?, isToday: Boolean): Boolean
         fun incrementToHour(time: LocalTime, isToday: Boolean): LocalTime
         fun decrementToHour(time: LocalTime, isToday: Boolean): LocalTime
         fun incrementToMinute(time: LocalTime, isToday: Boolean): LocalTime

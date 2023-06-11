@@ -28,27 +28,28 @@ class AddPresenter(
         @DrawableRes icon: Int,
         name: String,
         date: LocalDate?,
-        time: LocalTime?
+        time: LocalTime?,
+        isToday: Boolean
     ): Boolean {
-        val isNameValid = name.length > 3
-        val isTimeValid = LocalTime.now() < time
-        val isDateValid = LocalDate.now() <= date
+        val isNameInvalid = name.length < 3
+        val isTimeInvalid = isToday && LocalTime.now() > time
+        val isDataInvalid = LocalDate.now() > date
 
         val categories = Database.categoriesTaskData
 
-        if (!isNameValid) {
+        if (isNameInvalid) {
             view?.displayNameError(R.string.name_error)
             return false
         } else {
             view?.displayNameError(null)
         }
-        if (!isTimeValid) {
+        if (isTimeInvalid) {
             view?.displayTimeError(R.string.time_error)
             return false
         } else {
             view?.displayTimeError(null)
         }
-        if (!isDateValid) {
+        if (isDataInvalid) {
             view?.displayDateError(R.string.date_error)
             return false
         } else {
@@ -127,7 +128,7 @@ override fun decrementToHour(time: LocalTime, isToday: Boolean): LocalTime {
 override fun incrementToMinute(time: LocalTime, isToday: Boolean): LocalTime {
     val currentTime = LocalTime.now().plusMinutes(5)
     return when {
-        isToday -> {
+        isToday && time.hour == currentTime.hour -> {
             if (time.plusMinutes(1).minute >= currentTime.minute) {
                 time.plusMinutes(1)
             } else {
@@ -172,6 +173,7 @@ override fun getTimePickerDialog(context: Context): TimePickerDialog {
 
     val listener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
         view?.setTime(LocalTime.of(hourOfDay, minute))
+
     }
 
 

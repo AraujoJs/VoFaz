@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,7 +52,7 @@ class AddDialog(val view: Main.View) : DialogFragment(), Add.View {
             .setView(view)
             .setPositiveButton(R.string.save) { _, _ ->
                 name = binding.addEditName.text.toString()
-                presenter.add(R.drawable.icon_book, name, date, time)
+                presenter.add(R.drawable.icon_book, name, date, time, isToday)
             }
             .setNegativeButton(R.string.cancel) { dialogInterface, _ ->
                 dialogInterface.dismiss()
@@ -91,7 +92,14 @@ class AddDialog(val view: Main.View) : DialogFragment(), Add.View {
                 addBtnToday.setOnClickListener {
                     isToday = true
                     isTomorrow = false
+
                     date = LocalDate.now()
+                    val now = LocalTime.now()
+
+                    if (time < now) {
+                        time = now
+                        setTime(time)
+                    }
 
                     setButtonColors(
                         addBtnToday, R.color.orange_200, addBtnTomorrow,
@@ -158,7 +166,8 @@ class AddDialog(val view: Main.View) : DialogFragment(), Add.View {
                 }
 
                 hourLayout.hourTxtHour.setOnClickListener {
-                    timePickerDialog.show()
+                    val time = timePickerDialog.show()
+                    Log.i("Time", time.toString())
                 }
                 minuteLayout.minTxtMin.setOnClickListener {
                     timePickerDialog.show()
@@ -247,11 +256,19 @@ class AddDialog(val view: Main.View) : DialogFragment(), Add.View {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun setTime(sTime: LocalTime) {
-        if (sTime.hour > time.hour || (sTime.hour == time.hour && sTime.minute > time.minute)) {
+        val now = LocalTime.now()
+
+        if (isToday) {
+            if (sTime.hour > now.hour || sTime.hour == now.hour && sTime.minute > now.minute) {
+                time = sTime
+            }
+        } else {
             time = sTime
         }
+
         formatHourString(binding.timePickerLayout.hourLayout.hourTxtHour)
         formatMinuteString(binding.timePickerLayout.minutesLayout.minTxtMin)
+        
     }
 
     override fun setBtnDate() {
