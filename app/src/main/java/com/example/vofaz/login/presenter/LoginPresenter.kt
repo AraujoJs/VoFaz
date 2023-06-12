@@ -21,6 +21,7 @@ class LoginPresenter(
         val isPasswordValid = password.length >= 8
 
 
+        // TODO: Remove Handler
         Handler(Looper.getMainLooper()).postDelayed({
             if (!isEmailValid) {
                 view?.displayEmailFailure(R.string.email_error)

@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vofaz.R
 import com.example.vofaz.common.model.CategoryTask
 import com.example.vofaz.common.model.Database
-import com.example.vofaz.common.util.FragmentAttachListener
 import com.example.vofaz.common.view.RvAdapter
 import com.example.vofaz.databinding.FragmentContentMainBinding
 

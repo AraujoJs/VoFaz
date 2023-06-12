@@ -44,21 +44,14 @@ class RegisterPresenter(
                 override fun onSuccess() {
                     view?.onUserCreated()
                 }
-
                 override fun onFailure(message: String) {
                     view?.onUserNotCreated(message)
                 }
-
                 override fun onComplete() {
                     view?.showProgress(false)
                 }
-
             })
         }
-
-
-
-
     }
 
     override fun onDestroy() {

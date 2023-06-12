@@ -27,18 +27,17 @@ class RegisterActivity: AppCompatActivity(), Register.View {
             registerEditConfirmPassword.addTextChangedListener(watcher)
 
             registerBtnCreate.setOnClickListener {
-                presenter.create(
-                    registerEditFullName.text.toString(),
-                    registerEditEmail.text.toString(),
-                    registerEditPassword.text.toString(),
-                    registerEditConfirmPassword.text.toString()
-                )
+                val name = registerEditFullName.text.toString()
+                val email = registerEditEmail.text.toString()
+                val password = registerEditPassword.text.toString()
+                val confirm = registerEditConfirmPassword.text.toString()
+
+                presenter.create(name, email, password, confirm)
             }
             registerBtnLogin.setOnClickListener {
                 finish()
             }
         }
-
     }
 
     private val watcher = TextWatcher {
@@ -80,6 +79,4 @@ class RegisterActivity: AppCompatActivity(), Register.View {
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
     }
-
-
 }

@@ -1,4 +1,4 @@
-package com.example.vofaz.common.util
+package com.example.vofaz.main.view
 
 interface FragmentAttachListener {
     fun expandScreen()
