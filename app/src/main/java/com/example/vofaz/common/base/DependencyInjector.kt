@@ -1,15 +1,15 @@
 package com.example.vofaz.common.base
 
-import com.example.vofaz.Add
-import com.example.vofaz.Login
-import com.example.vofaz.Main
-import com.example.vofaz.Register
+import com.example.vofaz.add.Add
+import com.example.vofaz.login.Login
+import com.example.vofaz.main.Main
+import com.example.vofaz.register.Register
 import com.example.vofaz.data.FakeDatabase
 import com.example.vofaz.data.Repository
-import com.example.vofaz.presentation.AddPresenter
-import com.example.vofaz.presentation.LoginPresenter
-import com.example.vofaz.presentation.MainPresenter
-import com.example.vofaz.presentation.RegisterPresenter
+import com.example.vofaz.add.presenter.AddPresenter
+import com.example.vofaz.login.presenter.LoginPresenter
+import com.example.vofaz.main.presenter.MainPresenter
+import com.example.vofaz.register.presenter.RegisterPresenter
 
 object DependencyInjector {
 

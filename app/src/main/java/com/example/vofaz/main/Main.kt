@@ -1,4 +1,4 @@
-package com.example.vofaz
+package com.example.vofaz.main
 
 import com.example.vofaz.common.base.BasePresenter
 import com.example.vofaz.common.base.BaseView

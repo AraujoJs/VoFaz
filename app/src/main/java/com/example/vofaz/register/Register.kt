@@ -1,4 +1,4 @@
-package com.example.vofaz
+package com.example.vofaz.register
 
 import androidx.annotation.StringRes
 import com.example.vofaz.common.base.BasePresenter

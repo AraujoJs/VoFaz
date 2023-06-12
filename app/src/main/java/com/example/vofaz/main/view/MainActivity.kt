@@ -1,4 +1,4 @@
-package com.example.vofaz.view
+package com.example.vofaz.main.view
 
 import android.content.Intent
 import android.graphics.Color
@@ -12,12 +12,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import com.example.vofaz.Main
 import com.example.vofaz.R
 import com.example.vofaz.common.base.DependencyInjector
 import com.example.vofaz.common.model.Database
 import com.example.vofaz.common.model.Task
+import com.example.vofaz.common.util.FragmentAttachListener
 import com.example.vofaz.databinding.ActivityMainBinding
+import com.example.vofaz.login.view.LoginActivity
+import com.example.vofaz.main.Main
+import com.example.vofaz.add.view.AddDialog
 
 class MainActivity : AppCompatActivity(), Main.View, FragmentAttachListener {
 

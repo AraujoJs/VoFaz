@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_500"
-    tools:context=".view.LoginActivity">
+    tools:context=".login.view.LoginActivity">
 
     <ImageView
         android:id="@+id/login_img_logo"
@@ -84,7 +84,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.example.vofaz.view.SignButton
+    <com.example.vofaz.common.view.SignButton
         android:id="@+id/login_btn_sign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

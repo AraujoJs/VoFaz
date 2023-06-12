@@ -1,9 +1,9 @@
-package com.example.vofaz.presentation
+package com.example.vofaz.login.presenter
 
 import android.os.Handler
 import android.os.Looper
 import android.util.Patterns
-import com.example.vofaz.Login
+import com.example.vofaz.login.Login
 import com.example.vofaz.R
 import com.example.vofaz.data.MyCallback
 import com.example.vofaz.data.Repository

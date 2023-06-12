@@ -1,17 +1,18 @@
-package com.example.vofaz.view
+package com.example.vofaz.login.view
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.vofaz.Login
 import com.example.vofaz.common.base.DependencyInjector
 import com.example.vofaz.common.util.TextWatcher
 import com.example.vofaz.databinding.ActivityLoginBinding
+import com.example.vofaz.login.Login
+import com.example.vofaz.main.view.MainActivity
+import com.example.vofaz.register.view.RegisterActivity
 
 class LoginActivity : AppCompatActivity(), Login.View {
     override lateinit var presenter: Login.Presenter
-
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,15 +21,12 @@ class LoginActivity : AppCompatActivity(), Login.View {
         setContentView(binding.root)
         presenter = DependencyInjector.loginPresenter(this)
 
-
         with(binding) {
             loginEditEmail.addTextChangedListener(watcher)
             loginEditPassword.addTextChangedListener(watcher)
 
             loginBtnSign.setOnClickListener {
-
                 presenter.login(loginEditEmail.text.toString(), loginEditPassword.text.toString())
-
             }
             loginBtnCreate.setOnClickListener {
                 goToRegisterScreen()

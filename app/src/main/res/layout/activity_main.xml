@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray_500"
     android:orientation="vertical"
-    tools:context=".view.MainActivity">
+    tools:context=".main.view.MainActivity">
 
     <include
         android:id="@+id/main_toolbar"
@@ -43,7 +43,7 @@
                 android:layout_marginTop="-7dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:name="com.example.vofaz.view.ContentFragment"
+                android:name="com.example.vofaz.main.view.ContentFragment"
                 app:layout_constraintTop_toBottomOf="@id/main_btn_todo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

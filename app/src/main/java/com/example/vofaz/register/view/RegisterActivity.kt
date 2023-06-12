@@ -1,13 +1,14 @@
-package com.example.vofaz.view
+package com.example.vofaz.register.view
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.vofaz.Register
 import com.example.vofaz.common.base.DependencyInjector
 import com.example.vofaz.common.util.TextWatcher
 import com.example.vofaz.databinding.ActivityRegisterBinding
+import com.example.vofaz.main.view.MainActivity
+import com.example.vofaz.register.Register
 
 class RegisterActivity: AppCompatActivity(), Register.View {
     override lateinit var presenter: Register.Presenter

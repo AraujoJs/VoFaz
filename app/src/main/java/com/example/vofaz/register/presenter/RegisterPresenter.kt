@@ -1,10 +1,10 @@
-package com.example.vofaz.presentation
+package com.example.vofaz.register.presenter
 
 import android.util.Patterns
-import com.example.vofaz.Register
 import com.example.vofaz.R
 import com.example.vofaz.data.MyCallback
 import com.example.vofaz.data.Repository
+import com.example.vofaz.register.Register
 
 class RegisterPresenter(
     override var view: Register.View? = null,

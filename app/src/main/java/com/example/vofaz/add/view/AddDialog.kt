@@ -1,4 +1,4 @@
-package com.example.vofaz.view
+package com.example.vofaz.add.view
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -13,13 +13,13 @@ import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
-import com.example.vofaz.Add
-import com.example.vofaz.Main
 import com.example.vofaz.R
 import com.example.vofaz.common.base.DependencyInjector
 import com.example.vofaz.databinding.DialogAddBinding
 import com.example.vofaz.databinding.HourLayoutBinding
 import com.example.vofaz.databinding.MinuteLayoutBinding
+import com.example.vofaz.main.Main
+import com.example.vofaz.add.Add
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*

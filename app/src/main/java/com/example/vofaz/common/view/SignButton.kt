@@ -1,4 +1,4 @@
-package com.example.vofaz.view
+package com.example.vofaz.common.view
 
 import android.content.Context
 import android.util.AttributeSet

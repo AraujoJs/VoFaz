@@ -1,7 +1,7 @@
-package com.example.vofaz.presentation
+package com.example.vofaz.main.presenter
 
-import com.example.vofaz.Main
 import com.example.vofaz.data.Repository
+import com.example.vofaz.main.Main
 
 class MainPresenter(
     override var view: Main.View?,
