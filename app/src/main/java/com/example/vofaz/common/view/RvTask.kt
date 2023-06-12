@@ -15,7 +15,8 @@ import java.time.format.DateTimeFormatter
 class RvTask(
     private val context: Context,
     private var taskList: MutableList<Task>,
-    private val isTodo: Boolean
+    private val isTodo: Boolean,
+    private val callback: RecyclerListener
 ): RecyclerView.Adapter<RvTask.ViewHolder>() {
 
 
@@ -36,6 +37,10 @@ class RvTask(
 
                 taskBtnSelect.setOnClickListener {
                     taskList.remove(task)
+                    notifyDataSetChanged()
+                    if (taskList.size == 0) {
+                        callback.refreshRecycler()
+                    }
                 }
 
             }

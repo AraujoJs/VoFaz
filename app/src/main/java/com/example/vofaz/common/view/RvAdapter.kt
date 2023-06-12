@@ -15,34 +15,37 @@ class RvAdapter(
     private val context: Context,
     private var categoryList: MutableMap<String, CategoryTask>,
     private var isTodo: Boolean
-): RecyclerView.Adapter<RvAdapter.ViewHolder>() {
-
-
+): RecyclerView.Adapter<RvAdapter.ViewHolder>(), RecyclerListener {
 
     inner class ViewHolder(private val binding: BtnTaskLayoutBinding): RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("NotifyDataSetChanged")
-        fun bind(category: CategoryTask) {
+        fun bind(category: CategoryTask?) {
             with(binding) {
 
-                btnTxtName.setText(category.name)
-
-                if(category.isExpanded) {
-                    btnExpandedView.visibility = View.VISIBLE
-
+                if (category == null) {
+                    btnContainer.visibility = View.GONE
                 } else {
-                    btnExpandedView.visibility = View.GONE
+                    btnContainer.visibility = View.VISIBLE
+
+                    btnTxtName.setText(category.name)
+                    if (category.isExpanded) {
+                        btnExpandedView.visibility = View.VISIBLE
+
+                    } else {
+                        btnExpandedView.visibility = View.GONE
+                    }
+                    btnContainer.setOnClickListener {
+                        category.isExpanded = !(category.isExpanded)
+                        notifyDataSetChanged()
+                    }
+
+                    val tasks: MutableList<Task> = category.tasks ?: mutableListOf()
+
+                    rvBtnTask.layoutManager = LinearLayoutManager(context)
+                    val adapter = RvTask(context, tasks, isTodo, this@RvAdapter)
+
+                    rvBtnTask.adapter = adapter
                 }
-                btnContainer.setOnClickListener {
-                    category.isExpanded = !(category.isExpanded)
-                    notifyDataSetChanged()
-                }
-
-                val tasks: MutableList<Task> = category.tasks ?: mutableListOf()
-
-                rvBtnTask.layoutManager = LinearLayoutManager(context)
-                val adapter = RvTask(context, tasks, isTodo)
-
-                rvBtnTask.adapter = adapter
             }
 
         }
@@ -53,11 +56,22 @@ class RvAdapter(
         return ViewHolder(binding)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    override fun refreshRecycler() {
+        notifyDataSetChanged()
+    }
+
     override fun onBindViewHolder(holder: RvAdapter.ViewHolder, position: Int) {
         val keys = categoryList.keys.toList()
         val category = categoryList[keys[position]]
         if (category != null) {
-            holder.bind(category)
+            category.tasks?.let {
+                if (it.size > 0) {
+                    holder.bind(category)
+                } else {
+                    holder.bind(null)
+                }
+            }
         }
     }
 
