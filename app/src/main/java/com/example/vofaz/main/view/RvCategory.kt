@@ -1,4 +1,4 @@
-package com.example.vofaz.common.view
+package com.example.vofaz.main.view
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,13 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vofaz.common.model.CategoryTask
 import com.example.vofaz.common.model.Task
+import com.example.vofaz.common.view.RecyclerListener
 import com.example.vofaz.databinding.BtnTaskLayoutBinding
 
-class RvAdapter(
+class RvCategory(
     private val context: Context,
     private var categoryList: MutableMap<String, CategoryTask>,
-    private var isTodo: Boolean
-): RecyclerView.Adapter<RvAdapter.ViewHolder>(), RecyclerListener {
+    private var isTodo: Boolean,
+    private val callback: RecyclerListener
+): RecyclerView.Adapter<RvCategory.ViewHolder>(), RecyclerListener {
 
     inner class ViewHolder(private val binding: BtnTaskLayoutBinding): RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("NotifyDataSetChanged")
@@ -30,10 +32,10 @@ class RvAdapter(
                     btnTxtName.setText(category.name)
                     if (category.isExpanded) {
                         btnExpandedView.visibility = View.VISIBLE
-
                     } else {
                         btnExpandedView.visibility = View.GONE
                     }
+
                     btnContainer.setOnClickListener {
                         category.isExpanded = !(category.isExpanded)
                         notifyDataSetChanged()
@@ -42,7 +44,7 @@ class RvAdapter(
                     val tasks: MutableList<Task> = category.tasks ?: mutableListOf()
 
                     rvBtnTask.layoutManager = LinearLayoutManager(context)
-                    val adapter = RvTask(context, tasks, isTodo, this@RvAdapter)
+                    val adapter = RvTask(context, tasks, isTodo, callback)
 
                     rvBtnTask.adapter = adapter
                 }
@@ -51,7 +53,7 @@ class RvAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RvAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = BtnTaskLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
@@ -61,7 +63,7 @@ class RvAdapter(
         notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: RvAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val keys = categoryList.keys.toList()
         val category = categoryList[keys[position]]
         if (category != null) {

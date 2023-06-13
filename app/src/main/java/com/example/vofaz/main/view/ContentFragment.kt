@@ -12,14 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vofaz.R
 import com.example.vofaz.common.model.CategoryTask
 import com.example.vofaz.common.model.Database
-import com.example.vofaz.common.view.RvAdapter
+import com.example.vofaz.common.view.RecyclerListener
 import com.example.vofaz.databinding.FragmentContentMainBinding
 
-class ContentFragment: Fragment(R.layout.fragment_content_main) {
+class ContentFragment: Fragment(R.layout.fragment_content_main), RecyclerListener {
     private var binding: FragmentContentMainBinding? = null
     private var fragmentAttachListener: FragmentAttachListener? = null
-
-    private lateinit var adapter: RvAdapter
+    private lateinit var adapter: RvCategory
     private var categoryTasks = mutableMapOf<String, CategoryTask>()
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -29,11 +28,12 @@ class ContentFragment: Fragment(R.layout.fragment_content_main) {
         binding?.let {
             with(it) {
 
-                rvMainBtn.layoutManager = LinearLayoutManager(requireContext())
-                adapter = RvAdapter(view.context, categoryTasks,
-                    fragmentAttachListener?.isTodoSelected() ?: false
+                rvMainCategory.layoutManager = LinearLayoutManager(requireContext())
+                adapter = RvCategory(view.context, categoryTasks,
+                    fragmentAttachListener?.isTodoSelected() ?: false,
+                    this@ContentFragment
                 )
-                rvMainBtn.adapter = adapter
+                rvMainCategory.adapter = adapter
 
 
 
@@ -53,6 +53,10 @@ class ContentFragment: Fragment(R.layout.fragment_content_main) {
 
         }
 
+    override fun refreshRecycler() {
+        adapter.notifyDataSetChanged()
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     fun getData() {
         binding?.let {
@@ -65,10 +69,10 @@ class ContentFragment: Fragment(R.layout.fragment_content_main) {
 
                 if (database.isEmpty()) {
                     mainTxtFirst.visibility = View.VISIBLE
-                    rvMainBtn.visibility = View.GONE
+                    rvMainCategory.visibility = View.GONE
                 } else {
                     mainTxtFirst.visibility = View.GONE
-                    rvMainBtn.visibility = View.VISIBLE
+                    rvMainCategory.visibility = View.VISIBLE
 
                     database.forEach { (key, category) ->
                         categoryTasks[key] = category

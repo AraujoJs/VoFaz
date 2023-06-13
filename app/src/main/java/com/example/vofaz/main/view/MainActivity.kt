@@ -20,7 +20,7 @@ import com.example.vofaz.common.model.Task
 import com.example.vofaz.databinding.ActivityMainBinding
 import com.example.vofaz.login.view.LoginActivity
 import com.example.vofaz.main.Main
-import com.example.vofaz.add.view.AddDialog
+import com.example.vofaz.main.add.view.AddDialog
 
 class MainActivity : AppCompatActivity(), Main.View, FragmentAttachListener {
 
@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity(), Main.View, FragmentAttachListener {
         return isTodoSelected
     }
     override fun notifyData() {
-        fragment.notifyData()
+        fragment.getData()
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)

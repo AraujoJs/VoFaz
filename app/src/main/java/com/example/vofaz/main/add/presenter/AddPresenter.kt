@@ -1,4 +1,4 @@
-package com.example.vofaz.add.presenter
+package com.example.vofaz.main.add.presenter
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -12,7 +12,7 @@ import com.example.vofaz.common.model.Database
 import com.example.vofaz.common.model.Task
 import com.example.vofaz.data.MyCallback
 import com.example.vofaz.data.Repository
-import com.example.vofaz.add.Add
+import com.example.vofaz.main.add.Add
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*

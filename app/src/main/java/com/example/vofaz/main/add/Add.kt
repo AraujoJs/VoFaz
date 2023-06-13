@@ -1,4 +1,4 @@
-package com.example.vofaz.add
+package com.example.vofaz.main.add
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog

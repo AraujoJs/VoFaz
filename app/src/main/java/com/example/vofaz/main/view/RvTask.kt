@@ -1,4 +1,4 @@
-package com.example.vofaz.common.view
+package com.example.vofaz.main.view
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vofaz.common.model.Task
+import com.example.vofaz.common.view.RecyclerListener
 import com.example.vofaz.databinding.TaskLayoutBinding
 import java.time.format.DateTimeFormatter
 
@@ -48,14 +49,14 @@ class RvTask(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RvTask.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = TaskLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(binding)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun onBindViewHolder(holder: RvTask.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val task = taskList[position]
         if (isTodo) {
             if (!task.isSelected) {

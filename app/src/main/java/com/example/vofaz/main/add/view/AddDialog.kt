@@ -1,4 +1,4 @@
-package com.example.vofaz.add.view
+package com.example.vofaz.main.add.view
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -19,7 +19,7 @@ import com.example.vofaz.databinding.DialogAddBinding
 import com.example.vofaz.databinding.HourLayoutBinding
 import com.example.vofaz.databinding.MinuteLayoutBinding
 import com.example.vofaz.main.Main
-import com.example.vofaz.add.Add
+import com.example.vofaz.main.add.Add
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*
