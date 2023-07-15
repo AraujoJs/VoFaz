@@ -19,7 +19,8 @@ import java.util.*
 
 class AddPresenter(
     override var view: Add.View?,
-    private var repository: Repository? = null
+    private var repository: Repository? = null,
+    private var context: Context
 ) : Add.Presenter {
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -61,7 +62,7 @@ class AddPresenter(
         } else if (date?.isEqual(LocalDate.now().plusDays(1)) == true) {
             "tomorrow"
         } else {
-            "other"
+            date.toString()
         }
 
         when (day) {
@@ -69,7 +70,7 @@ class AddPresenter(
                 if (categories.containsKey("today")) {
                     addTask(day, icon, name, date, time)
                 } else {
-                    addCategory(day, R.string.today_task, mutableListOf())
+                    addCategory(day, R.string.today_task, mutableListOf(), context)
                     addTask(day, icon, name, date, time)
                 }
             }
@@ -77,15 +78,15 @@ class AddPresenter(
                 if (categories.containsKey("tomorrow")) {
                     addTask(day, icon, name, date, time)
                 } else {
-                    addCategory(day, R.string.tomorrow_task, mutableListOf())
+                    addCategory(day, R.string.tomorrow_task, mutableListOf(), context)
                     addTask(day, icon, name, date, time)
                 }
             }
             else -> {
-                if (categories.containsKey("other")) {
+                if (categories.containsKey(date.toString())) {
                     addTask(day, icon, name, date, time)
                 } else {
-                    addCategory(day, R.string.format_date_task, mutableListOf())
+                    addCategory(day, R.string.format_date_task, mutableListOf(), context)
                     addTask(day, icon, name, date, time)
                 }
             }
@@ -210,8 +211,8 @@ override fun onDestroy() {
         })
     }
 
-    private fun addCategory(day: String, name: Int, tasks: MutableList<Task>) {
-        repository?.addCategory(day, name, tasks, false,  object : MyCallback {
+    private fun addCategory(day: String, name: Int, tasks: MutableList<Task>, context: Context) {
+        repository?.addCategory(context, day, name, tasks, false,  object : MyCallback {
             override fun onSuccess() {
 
             }

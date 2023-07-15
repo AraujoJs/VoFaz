@@ -1,5 +1,6 @@
 package com.example.vofaz.data
 
+import android.content.Context
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.example.vofaz.common.model.Task
@@ -22,7 +23,7 @@ class Repository(
         database.addTask(day, icon, name, date, time, callback)
     }
 
-    fun addCategory(day: String, @StringRes name: Int, tasks: MutableList<Task>, isExpanded: Boolean, callback: MyCallback) {
-        database.addCategory(day, name, tasks, isExpanded, callback)
+    fun addCategory(context: Context, day: String, @StringRes name: Int, tasks: MutableList<Task>, isExpanded: Boolean, callback: MyCallback) {
+        database.addCategory(context, day, name, tasks, isExpanded, callback)
     }
 }

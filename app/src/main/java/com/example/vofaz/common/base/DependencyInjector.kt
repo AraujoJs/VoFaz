@@ -1,5 +1,6 @@
 package com.example.vofaz.common.base
 
+import android.content.Context
 import com.example.vofaz.main.add.Add
 import com.example.vofaz.login.Login
 import com.example.vofaz.main.Main
@@ -25,8 +26,8 @@ object DependencyInjector {
         return MainPresenter(context, repository())
     }
 
-    fun addPresenter(context: Add.View): AddPresenter {
-        return AddPresenter(context, repository())
+    fun addPresenter(view: Add.View, context: Context): AddPresenter {
+        return AddPresenter(view, repository(), context)
     }
 
     private fun repository(): Repository {

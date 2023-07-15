@@ -1,9 +1,11 @@
 package com.example.vofaz.data
 
+import android.content.Context
 import android.os.Build
 import android.os.Looper
 import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
+import com.example.vofaz.R
 import com.example.vofaz.common.model.CategoryTask
 import com.example.vofaz.common.model.Database
 import com.example.vofaz.common.model.Task
@@ -70,6 +72,7 @@ class FakeDatabase : MyDatabase {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun addCategory(
+        context: Context,
         day: String,
         name: Int,
         tasks: MutableList<Task>,
@@ -81,7 +84,8 @@ class FakeDatabase : MyDatabase {
         if (categories.containsKey(day)) {
             callback.onFailure("Category already exist!")
         } else {
-            categories[day] = CategoryTask(name, tasks, isExpanded)
+            val string = context.getString(R.string.format_date_task, day)
+            categories[day] = CategoryTask(string, tasks, isExpanded)
         }
 
     }

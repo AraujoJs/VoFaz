@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vofaz.common.model.CategoryTask
@@ -16,18 +17,21 @@ class RvCategory(
     private val context: Context,
     private var categoryList: MutableMap<String, CategoryTask>,
     private var isTodo: Boolean,
-    private val callback: RecyclerListener
+    private val callback: RecyclerListener,
+    private val txtMainFirst: TextView
 ): RecyclerView.Adapter<RvCategory.ViewHolder>(), RecyclerListener {
 
     inner class ViewHolder(private val binding: BtnTaskLayoutBinding): RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("NotifyDataSetChanged")
         fun bind(category: CategoryTask?) {
             with(binding) {
-
-                if (category == null) {
+                if ((category == null) || (categoryList.isEmpty()) || category.tasks?.isEmpty() == true) {
                     btnContainer.visibility = View.GONE
+                    txtMainFirst.visibility = View.VISIBLE
                 } else {
                     btnContainer.visibility = View.VISIBLE
+//                    txtMainFirst.visibility = View.GONE
+
 
                     btnTxtName.setText(category.name)
                     if (category.isExpanded) {

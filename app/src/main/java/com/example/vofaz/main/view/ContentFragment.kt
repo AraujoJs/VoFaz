@@ -19,20 +19,28 @@ class ContentFragment: Fragment(R.layout.fragment_content_main), RecyclerListene
     private var binding: FragmentContentMainBinding? = null
     private var fragmentAttachListener: FragmentAttachListener? = null
     private lateinit var adapter: RvCategory
-    private var categoryTasks = mutableMapOf<String, CategoryTask>()
+    lateinit var categoryTasks: MutableMap<String, CategoryTask>
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentContentMainBinding.bind(view)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            categoryTasks = Database.categoriesTaskData
+        }
         binding?.let {
             with(it) {
 
                 rvMainCategory.layoutManager = LinearLayoutManager(requireContext())
-                adapter = RvCategory(view.context, categoryTasks,
+
+                adapter = RvCategory(
+                    view.context,
+                    categoryTasks,
                     fragmentAttachListener?.isTodoSelected() ?: false,
-                    this@ContentFragment
+                    this@ContentFragment,
+                    mainTxtFirst
                 )
+
                 rvMainCategory.adapter = adapter
 
 
@@ -53,7 +61,22 @@ class ContentFragment: Fragment(R.layout.fragment_content_main), RecyclerListene
 
         }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun refreshRecycler() {
+        var beRemoved = ""
+        for (key in categoryTasks.keys) {
+            if (categoryTasks[key]?.tasks?.size == 0) {
+                beRemoved = key
+            }
+        }
+        if (beRemoved != "") {
+            categoryTasks.remove(beRemoved)
+            beRemoved = ""
+        }
+
+        if (categoryTasks.isEmpty()) {
+            binding?.mainTxtFirst?.visibility = View.VISIBLE
+        }
         adapter.notifyDataSetChanged()
     }
 
@@ -84,10 +107,6 @@ class ContentFragment: Fragment(R.layout.fragment_content_main), RecyclerListene
 
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun notifyData() {
-        getData()
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

@@ -44,7 +44,7 @@ class AddDialog(val view: Main.View) : DialogFragment(), Add.View {
         val view = layoutInflater.inflate(R.layout.dialog_add, null)
 
         binding = DialogAddBinding.bind(view)
-        presenter = DependencyInjector.addPresenter(this)
+        presenter = DependencyInjector.addPresenter(this, requireContext())
         date = LocalDate.now()
         time = LocalTime.now().plusMinutes(5)
 

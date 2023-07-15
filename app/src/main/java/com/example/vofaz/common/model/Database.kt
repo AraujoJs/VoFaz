@@ -2,9 +2,6 @@ package com.example.vofaz.common.model
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.example.vofaz.R
-import java.time.LocalDate
-import java.time.LocalTime
 import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -32,8 +29,6 @@ object Database {
 //        categoriesTaskData["today"] = CategoryTask(R.string.today_task, tasks, true)
 //        categoriesTaskData["tomorrow"] = CategoryTask(R.string.tomorrow_task, tasks, false)
 //        categoriesTaskData["other"] = CategoryTask(R.string.format_date_task, tasks, false)
-
-
     }
 
 }
